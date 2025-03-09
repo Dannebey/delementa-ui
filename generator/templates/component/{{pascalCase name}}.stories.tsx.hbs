@@ -1,15 +1,25 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
-import {{pascalCase name}} from './{{pascalCase name}}';
+import type { Meta, StoryObj } from "@storybook/react";
+import { {{pascalCase name}} } from './{{pascalCase name}}';
 
-export default {
-title: 'Components/{{pascalCase name}}',
-component: {{pascalCase name}},
-} as ComponentMeta<typeof {{pascalCase name}}>;
+const meta: Meta<typeof {{pascalCase name}}> = {
+    title: "UI/{{pascalCase name}}",
+    component: {{pascalCase name}},
+    argTypes: {
+     // component props
+    },
+};
 
-    const Template: ComponentStory<typeof {{pascalCase name}}> = (args) => <{{pascalCase name}} {...args} />;
+export default meta;
+type Story = StoryObj<typeof {{pascalCase name}}>;
 
-        export const Default = Template.bind({});
-        Default.args = {
-        // Пропсы по умолчанию
-        };
+/**
+* @example
+*
+* export const Primary: Story = {
+*   args: {
+*     label: "Primary {{pascalCase name}}",
+*     size: "m",
+*     variant: "primary",
+*   },
+* };
+*/
