@@ -1,0 +1,85 @@
+@use "sass:map";
+@use "sass:list";
+
+$sizes: (
+  xs: (
+    dot-size: 4px,
+    delays: (
+      0s,
+      0.1s,
+      0.2s,
+    ),
+  ),
+  s: (
+    dot-size: 6px,
+    delays: (
+      0s,
+      0.15s,
+      0.3s,
+    ),
+  ),
+  m: (
+    dot-size: 8px,
+    delays: (
+      0s,
+      0.2s,
+      0.4s,
+    ),
+  ),
+  l: (
+    dot-size: 10px,
+    delays: (
+      0s,
+      0.25s,
+      0.5s,
+    ),
+  ),
+  xl: (
+    dot-size: 12px,
+    delays: (
+      0s,
+      0.3s,
+      0.6s,
+    ),
+  ),
+);
+
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+
+  @each $size, $settings in $sizes {
+    &.#{$size} {
+      .dot {
+        width: map.get($settings, dot-size);
+        height: map.get($settings, dot-size);
+        @for $i from 1 through 3 {
+          &:nth-child(#{$i}) {
+            animation-delay: list.nth(map.get($settings, delays), $i);
+          }
+        }
+      }
+    }
+  }
+}
+
+.dot {
+  background-color: var(--loader-color);
+  color: var(--loader-color);
+  border-radius: 50%;
+  animation: bounce 0.6s infinite;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-0.5rem);
+    opacity: 0.7;
+  }
+}

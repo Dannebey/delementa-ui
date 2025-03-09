@@ -1,0 +1,158 @@
+@use "sass:color";
+@use "sass:map";
+
+// Карта базовых цветов
+$colors: (
+  "primary": (
+    0,
+    123,
+    255,
+  ),
+  "secondary": (
+    108,
+    117,
+    125,
+  ),
+  "success": (
+    40,
+    167,
+    69,
+  ),
+  "danger": (
+    220,
+    53,
+    69,
+  ),
+  "warning": (
+    255,
+    193,
+    7,
+  ),
+  "info": (
+    23,
+    162,
+    184,
+  ),
+  "light": (
+    248,
+    249,
+    250,
+  ),
+  "dark": (
+    52,
+    58,
+    64,
+  ),
+);
+
+@layer delementa-default-theme {
+  :root {
+    // Генерируем CSS-переменные для базовых цветов
+    @each $name, $value in $colors {
+      --color-#{$name}: #{$value};
+    }
+
+    // Вычисляем светлый и тёмный варианты основного цвета
+    --color-primary-light: color-mix(
+      in srgb,
+      70% rgb(var(--color-primary)),
+      white
+    );
+    --color-primary-dark: color-mix(
+      in srgb,
+      70% rgb(var(--color-primary)),
+      black
+    );
+
+    // Loader
+    --loader-color: rgb(var(--color-primary));
+
+    // Button:primary
+    --btn-color-primary-bg: rgb(var(--color-primary));
+    --btn-color-primary-color: #ffffff;
+    --btn-color-primary-border: rgb(var(--color-primary));
+    //Button:primary:hover
+    --btn-color-primary-hover-bg: var(--color-primary-light);
+    --btn-color-primary-hover-color: #ffffff;
+    --btn-color-primary-hover-border: var(--color-primary-light);
+    // Button:primary:active
+    --btn-color-primary-active-bg: var(--color-primary-dark);
+    --btn-color-primary-active-color: #ffffff;
+    --btn-color-primary-active-border: var(--color-primary-dark);
+    //Button:primary:disabled //TODO Убрать хардкод цвета
+    --btn-color-primary-disabled-bg: #e0e0e0;
+    --btn-color-primary-disabled-color: #a1a1a1;
+    --btn-color-primary-disabled-border: #e0e0e0;
+
+    // Button:outline
+    --btn-color-outline-bg: transparent;
+    --btn-color-outline-color: rgb(var(--color-primary));
+    --btn-color-outline-border: rgb(var(--color-primary));
+    // Button:outline:hover
+    --btn-color-outline-hover-bg: rgba(var(--color-primary), 0.3);
+    --btn-color-outline-hover-color: var(--color-primary-light);
+    --btn-color-outline-hover-border: var(--color-primary-light);
+    // Button:outline:active
+    --btn-color-outline-active-bg: rgba(var(--color-primary), 0.5);
+    --btn-color-outline-active-color: var(--color-primary-dark);
+    --btn-color-outline-active-border: var(--color-primary-dark);
+    // Button:outline:disabled // TODO Убрать хардкод в этом блоке
+    --btn-color-outline-disabled-bg: transparent;
+    --btn-color-outline-disabled-color: #a1a1a1;
+    --btn-color-outline-disabled-border: #e0e0e0;
+
+    //Button:text
+    --btn-color-text-bg: transparent;
+    --btn-color-text-color: rgb(var(--color-primary));
+    --btn-color-text-border: transparent;
+    //Button:text:hover
+    --btn-color-text-hover-bg: transparent;
+    --btn-color-text-hover-color: var(--color-primary-light);
+    --btn-color-text-hover-border: transparent;
+    //Button:text:active
+    --btn-color-text-active-bg: transparent;
+    --btn-color-text-active-color: var(--color-primary-dark);
+    --btn-color-text-active-border: transparent;
+    //Button:text:disabled
+    --btn-color-text-disabled-bg: transparent;
+    --btn-color-text-disabled-color: #a1a1a1;
+    --btn-color-text-disabled-border: transparent;
+
+    //Button:link
+    --btn-color-link-bg: transparent;
+    --btn-color-link-color: rgb(var(--color-primary));
+    --btn-color-link-border: transparent;
+    //Button:link:hover
+    --btn-color-link-hover-bg: transparent;
+    --btn-color-link-hover-color: var(--color-primary-light);
+    --btn-color-link-hover-border: transparent;
+    //Button:link:active
+    --btn-color-link-active-bg: transparent;
+    --btn-color-link-active-color: var(--color-primary-dark);
+    --btn-color-link-active-border: transparent;
+    //Button:link:disabled
+    --btn-color-link-disabled-bg: transparent;
+    --btn-color-link-disabled-color: #a1a1a1;
+    --btn-color-link-disabled-border: transparent;
+
+    //Button shared
+    --btn-border-radius: 4px;
+    --btn-transition:
+      background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+    --btn-focus-bg: var(--color-primary);
+
+    // Размеры шрифта для кнопок
+    --font-size-xs: 0.7rem;
+    --font-size-s: 0.8rem;
+    --font-size-m: 1rem;
+    --font-size-l: 1.2rem;
+    --font-size-xl: 1.4rem;
+
+    // Отступы для кнопок
+    --padding-xs: 0.4rem 0.8rem;
+    --padding-s: 0.6rem 1rem;
+    --padding-m: 0.8rem 1.2rem;
+    --padding-l: 1rem 1.4rem;
+    --padding-xl: 1.2rem 1.6rem;
+  }
+}

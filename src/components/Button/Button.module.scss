@@ -1,0 +1,170 @@
+@use "sass:color";
+
+// Mixin для определения базовых состояний кнопки
+@mixin button-variant(
+  $bg,
+  $color,
+  $border,
+  $hover-bg,
+  $hover-color,
+  $hover-border,
+  $active-bg,
+  $active-color,
+  $active-border,
+  $disabled-bg,
+  $disabled-color,
+  $disabled-border,
+  $focus-bg
+) {
+  background-color: $bg;
+  color: $color;
+  border-color: $border;
+  &:hover {
+    background-color: $hover-bg;
+    color: $hover-color;
+    border-color: $hover-border;
+  }
+  &:active {
+    background-color: $active-bg;
+    color: $active-color;
+    border-color: $active-border;
+  }
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba($focus-bg, 0.3);
+  }
+  &:disabled {
+    cursor: not-allowed;
+    background-color: $disabled-bg;
+    color: $disabled-color;
+    border-color: $disabled-border;
+    pointer-events: none;
+  }
+}
+
+.button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  cursor: pointer;
+  border: 1px solid transparent;
+  border-radius: var(--btn-border-radius);
+  transition: var(--btn-transition);
+  text-decoration: none;
+  background: transparent;
+
+  // Вариант primary
+  &.primary {
+    @include button-variant(
+      var(--btn-color-primary-bg),
+      var(--btn-color-primary-color),
+      var(--btn-color-primary-border),
+      var(--btn-color-primary-hover-bg),
+      var(--btn-color-primary-hover-color),
+      var(--btn-color-primary-hover-border),
+      var(--btn-color-primary-active-bg),
+      var(--btn-color-primary-active-color),
+      var(--btn-color-primary-active-border),
+      var(--btn-color-primary-disabled-bg),
+      var(--btn-color-primary-disabled-color),
+      var(--btn-color-primary-disabled-border),
+      var(--btn-focus-bg)
+    );
+  }
+
+  // Вариант outline с hover и active эффектами
+  &.outline {
+    @include button-variant(
+      var(--btn-color-outline-bg),
+      var(--btn-color-outline-color),
+      var(--btn-color-outline-border),
+      var(--btn-color-outline-hover-bg),
+      var(--btn-color-outline-hover-color),
+      var(--btn-color-outline-hover-border),
+      var(--btn-color-outline-active-bg),
+      var(--btn-color-outline-active-color),
+      var(--btn-color-outline-active-border),
+      var(--btn-color-outline-disabled-bg),
+      var(--btn-color-outline-disabled-color),
+      var(--btn-color-outline-disabled-border),
+      var(--btn-focus-bg)
+    );
+  }
+
+  // Вариант text с hover и active эффектами
+  &.text {
+    @include button-variant(
+      var(--btn-color-text-bg),
+      var(--btn-color-text-color),
+      var(--btn-color-text-border),
+      var(--btn-color-text-hover-bg),
+      var(--btn-color-text-hover-color),
+      var(--btn-color-text-hover-border),
+      var(--btn-color-text-active-bg),
+      var(--btn-color-text-active-color),
+      var(--btn-color-text-active-border),
+      var(--btn-color-text-disabled-bg),
+      var(--btn-color-text-disabled-color),
+      var(--btn-color-text-disabled-border),
+      var(--btn-focus-bg)
+    );
+  }
+
+  // Вариант link – здесь базовые состояния заданы через mixin, а hover дополняется подчеркиванием
+  &.link {
+    @include button-variant(
+      var(--btn-color-link-bg),
+      var(--btn-color-link-color),
+      var(--btn-color-link-border),
+      var(--btn-color-link-hover-bg),
+      var(--btn-color-link-hover-color),
+      var(--btn-color-link-hover-border),
+      var(--btn-color-link-active-bg),
+      var(--btn-color-link-active-color),
+      var(--btn-color-link-active-border),
+      var(--btn-color-link-disabled-bg),
+      var(--btn-color-link-disabled-color),
+      var(--btn-color-link-disabled-border),
+      var(--btn-focus-bg)
+    );
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  // Размеры кнопки через цикл: xs, s, m, l, xl
+  @each $size in (xs, s, m, l, xl) {
+    &.#{$size} {
+      font-size: var(--font-size-#{$size});
+      padding: var(--padding-#{$size});
+    }
+  }
+}
+
+.content {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loaderWrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon,
+.label {
+  display: inline-flex;
+  align-items: center;
+}
+
+.icon {
+  margin-right: 0.5rem;
+}
