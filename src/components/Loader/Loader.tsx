@@ -17,12 +17,7 @@ export const Loader: React.FC<LoaderProps> = (props) => {
     : undefined;
   return (
     <div
-      className={clsx(
-        styles.loader,
-        styles[size],
-        className,
-        "delementa-ui-loader",
-      )}
+      className={clsx(styles.loader, styles[size], className)}
       style={loaderStyle}
       aria-label="Loading"
     >

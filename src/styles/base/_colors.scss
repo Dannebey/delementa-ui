@@ -1,0 +1,64 @@
+@layer delementa-default-theme {
+  :root {
+    // Карта базовых цветов
+    $colors: (
+      "primary": (
+        0,
+        123,
+        255,
+      ),
+      "secondary": (
+        108,
+        117,
+        125,
+      ),
+      "success": (
+        40,
+        167,
+        69,
+      ),
+      "danger": (
+        220,
+        53,
+        69,
+      ),
+      "warning": (
+        255,
+        193,
+        7,
+      ),
+      "info": (
+        23,
+        162,
+        184,
+      ),
+      "light": (
+        248,
+        249,
+        250,
+      ),
+      "dark": (
+        52,
+        58,
+        64,
+      ),
+    );
+
+    // Генерируем CSS-переменные для базовых цветов
+    @each $name, $value in $colors {
+      --color-#{$name}: #{$value};
+    }
+
+    // Вычисляем светлый и тёмный варианты основного цвета
+    --color-primary-light: color-mix(
+      in srgb,
+      70% rgb(var(--color-primary)),
+      white
+    );
+    --color-primary-dark: color-mix(
+      in srgb,
+      70% rgb(var(--color-primary)),
+      black
+    );
+  }
+}

@@ -137,8 +137,8 @@
   // Размеры кнопки через цикл: xs, s, m, l, xl
   @each $size in (xs, s, m, l, xl) {
     &.#{$size} {
-      font-size: var(--font-size-#{$size});
-      padding: var(--padding-#{$size});
+      font-size: var(--btn-font-size-#{$size});
+      padding: var(--btn-padding-#{$size});
     }
   }
 }
