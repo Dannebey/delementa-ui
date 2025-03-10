@@ -1,0 +1,84 @@
+@layer delementa-default-theme {
+    :root {
+        // Input:primary
+        --input-color-primary-bg: transparent;
+        --input-color-primary-color: rgb(var(--color-primary));
+        --input-color-primary-border: rgb(var(--color-primary));
+        // Input:primary:hover
+        --input-color-primary-hover-bg: rgba(var(--color-primary), 0.05);
+        --input-color-primary-hover-color: var(--color-primary-light);
+        --input-color-primary-hover-border: var(--color-primary-light);
+        // Input:primary:active
+        --input-color-primary-active-bg: rgba(var(--color-primary), 0.1);
+        --input-color-primary-active-color: var(--color-primary-dark);
+        --input-color-primary-active-border: var(--color-primary-dark);
+        // Input:primary:disabled // TODO Убрать хардкод цвета
+        --input-color-primary-disabled-bg: transparent;
+        --input-color-primary-disabled-color: #a1a1a1;
+        --input-color-primary-disabled-border: #e0e0e0;
+
+        // Input:outline
+        --input-color-outline-bg: transparent;
+        --input-color-outline-color: rgb(var(--color-primary));
+        --input-color-outline-border: rgb(var(--color-primary));
+        // Input:outline:hover
+        --input-color-outline-hover-bg: rgba(var(--color-primary), 0.05);
+        --input-color-outline-hover-color: var(--color-primary-dark);
+        --input-color-outline-hover-border: var(--color-primary-dark);
+        // Input:outline:active
+        --input-color-outline-active-bg: transparent;
+        --input-color-outline-active-color: var(--color-primary-dark);
+        --input-color-outline-active-border: var(--color-primary-dark);
+        // Input:outline:disabled //TODO Убрать хардкод цвета
+        --input-color-outline-disabled-bg: transparent;
+        --input-color-outline-disabled-color: #a1a1a1;
+        --input-color-outline-disabled-border: #e0e0e0;
+
+        //Input shared
+        --input-border-radius: 4px;
+        --input-transition:
+                background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+        --input-focus-bg: var(--color-primary);
+
+        // Ситили при ошибке валидации
+        --input-error-bg: rgba(var(--color-danger),0.1);
+        --input-error-color: var(--color-primary-danger);
+        --input-error-border: var(--color-primary-danger);
+        --input-error-hover: var(--color-primary-danger);
+
+        // Размеры шрифта для инпутов
+        --input-font-size-xs: 0.6rem;
+        --input-font-size-s: 0.7rem;
+        --input-font-size-m: 1rem;
+        --input-font-size-l: 1.2rem;
+        --input-font-size-xl: 1.4rem;
+
+        // Отступы для инпуна
+        --input-padding-xs: 0.2rem 0.4rem;
+        --input-padding-s: 0.3rem 0.6rem;
+        --input-padding-m: 0.5rem 1rem;
+        --input-padding-l: 1rem 1.4rem;
+        --input-padding-xl: 1.2rem 1.6rem;
+
+        // Размеры шрифта для заголовка
+        --label-font-size-xs: 0.8rem;
+        --label-font-size-s: 1rem;
+        --label-font-size-m: 1.2rem;
+        --label-font-size-l: 1.4rem;
+        --label-font-size-xl: 1.6rem;
+
+        // Отступы для заголовка
+        --label-margin-xs: 0.1rem;
+        --label-margin-s: 0.2rem;
+        --label-margin-m: 0.3rem;
+        --label-margin-l: 0.4rem;
+        --label-margin-xl: 0.5rem;
+
+        // Размеры шрифта для ошибки
+        --error-font-size-xs: 0.6rem;
+        --error-font-size-s: 0.6rem;
+        --error-font-size-m: 0.9rem;
+        --error-font-size-l: 1rem;
+        --error-font-size-xl: 1.1rem;
+    }
+}
