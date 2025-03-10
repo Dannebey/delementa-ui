@@ -60,5 +60,10 @@
       70% rgb(var(--color-primary)),
       black
     );
+    --color-primary-danger: color-mix(
+      in srgb,
+      70% rgb(var(--color-danger)),
+      white
+    );
   }
 }
