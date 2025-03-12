@@ -61,24 +61,24 @@
         --input-padding-xl: 1.2rem 1.6rem;
 
         // Размеры шрифта для заголовка
-        --label-font-size-xs: 0.8rem;
-        --label-font-size-s: 1rem;
-        --label-font-size-m: 1.2rem;
-        --label-font-size-l: 1.4rem;
-        --label-font-size-xl: 1.6rem;
+        --input-label-font-size-xs: 0.8rem;
+        --input-label-font-size-s: 1rem;
+        --input-label-font-size-m: 1.2rem;
+        --input-label-font-size-l: 1.4rem;
+        --input-label-font-size-xl: 1.6rem;
 
         // Отступы для заголовка
-        --label-margin-xs: 0.1rem;
-        --label-margin-s: 0.2rem;
-        --label-margin-m: 0.3rem;
-        --label-margin-l: 0.4rem;
-        --label-margin-xl: 0.5rem;
+        --input-label-margin-xs: 0.1rem;
+        --input-label-margin-s: 0.2rem;
+        --input-label-margin-m: 0.3rem;
+        --input-label-margin-l: 0.4rem;
+        --input-label-margin-xl: 0.5rem;
 
         // Размеры шрифта для ошибки
-        --error-font-size-xs: 0.6rem;
-        --error-font-size-s: 0.6rem;
-        --error-font-size-m: 0.9rem;
-        --error-font-size-l: 1rem;
-        --error-font-size-xl: 1.1rem;
+        --input-error-font-size-xs: 0.6rem;
+        --input-error-font-size-s: 0.6rem;
+        --input-error-font-size-m: 0.9rem;
+        --input-error-font-size-l: 1rem;
+        --input-error-font-size-xl: 1.1rem;
     }
 }

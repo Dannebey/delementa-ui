@@ -55,9 +55,9 @@
 
   @each $size in (xs, s, m, l, xl) {
     &.#{$size} {
-      font-size: var(--label-font-size-#{$size});
-      margin-bottom: var(--label-margin-#{$size});
-      margin-left: var(--label-margin-#{$size});
+      font-size: var(--input-label-font-size-#{$size});
+      margin-bottom: var(--input-label-margin-#{$size});
+      margin-left: var(--input-label-margin-#{$size});
     }
   }
 }
@@ -65,9 +65,9 @@
 .errorMessage {
   @each $size in (xs, s, m, l, xl) {
     &.#{$size} {
-      font-size: var(--error-font-size-#{$size});
-      margin-top: var(--label-margin-#{$size});
-      margin-left: var(--label-margin-#{$size});
+      font-size: var(--input-error-font-size-#{$size});
+      margin-top: var(--input-label-margin-#{$size});
+      margin-left: var(--input-label-margin-#{$size});
     }
   }
 }

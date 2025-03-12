@@ -3,15 +3,13 @@ import styles from "./Input.module.scss";
 import clsx from "clsx";
 import { Size } from "@/types/Size";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-
-type InputType = "text" | "number" | "password";
+import { InputType, InputVariant } from "./Input.types";
 
 export interface InputProps
   extends Omit<InputHTMLAttributes<HTMLInputElement>, "type" | "size"> {
   label?: string;
-  labelSize?: Size;
-  variant?: "primary" | "outline";
-  type?: InputType;
+  variant?: InputVariant;
+  type: InputType;
   size?: Size;
   error?: boolean;
   errorMessage?: string;
@@ -21,7 +19,6 @@ export interface InputProps
 export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const {
     label,
-    labelSize,
     variant = "primary",
     error,
     className,
@@ -33,13 +30,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
     ...otherProps
   } = props;
 
-  const [isPasswordVisible, setIsPasswordVisible] = useReducer(
+  const [isPasswordVisible, togglePasswordVisible] = useReducer(
     (v) => !v,
     false,
   );
 
-  const passwordIcon = isPasswordVisible ? <FaRegEyeSlash /> : <FaRegEye />;
   const inputType = type === "password" && isPasswordVisible ? "text" : type;
+  const passwordIcon = isPasswordVisible ? <FaRegEyeSlash /> : <FaRegEye />;
+  const arialLabel = isPasswordVisible ? "Скрыть пароль" : "Показать пароль";
 
   const inputClass = clsx(
     styles.input,
@@ -73,8 +71,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
       {type === "password" && (
         <span
           className={styles.icon}
-          onClick={setIsPasswordVisible}
-          aria-label={isPasswordVisible ? "Скрыть пароль" : "Показать пароль"}
+          onClick={togglePasswordVisible}
+          aria-label={arialLabel}
           role="button"
           tabIndex={0}
         >
