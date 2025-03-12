@@ -1,0 +1,184 @@
+@use "sass:color";
+
+// Mixin для определения базовых состояний инпута
+@mixin input-variant(
+  $bg,
+  $color,
+  $border,
+  $hover-bg,
+  $hover-color,
+  $hover-border,
+  $active-bg,
+  $active-color,
+  $active-border,
+  $disabled-bg,
+  $disabled-color,
+  $disabled-border,
+  $focus-bg
+) {
+  background-color: $bg;
+  color: $color;
+  border-color: $border;
+  &:hover {
+    background-color: $hover-bg;
+    color: $hover-color;
+    border-color: $hover-border;
+  }
+  &:active {
+    background-color: $active-bg;
+    color: $active-color;
+    border-color: $active-border;
+  }
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba($focus-bg, 0.3);
+  }
+  &:disabled {
+    cursor: not-allowed;
+    background-color: $disabled-bg;
+    color: $disabled-color;
+    border-color: $disabled-border;
+    pointer-events: none;
+  }
+}
+
+.inputWrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.label {
+  display: inline-flex;
+  align-items: start;
+  color: var(--input-color-primary-color);
+
+  @each $size in (xs, s, m, l, xl) {
+    &.#{$size} {
+      font-size: var(--input-label-font-size-#{$size});
+      margin-bottom: var(--input-label-margin-#{$size});
+      margin-left: var(--input-label-margin-#{$size});
+    }
+  }
+}
+
+.errorMessage {
+  @each $size in (xs, s, m, l, xl) {
+    &.#{$size} {
+      font-size: var(--input-error-font-size-#{$size});
+      margin-top: var(--input-label-margin-#{$size});
+      margin-left: var(--input-label-margin-#{$size});
+    }
+  }
+}
+
+.input {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  cursor: text;
+  border: 1px solid transparent;
+  border-radius: var(--input-border-radius);
+  transition: var(--input-transition);
+  text-decoration: none;
+  background: transparent;
+
+  // Вариант primary
+  &.primary {
+    @include input-variant(
+      var(--input-color-primary-bg),
+      var(--input-color-primary-color),
+      var(--input-color-primary-border),
+      var(--input-color-primary-hover-bg),
+      var(--input-color-primary-hover-color),
+      var(--input-color-primary-hover-border),
+      var(--input-color-primary-active-bg),
+      var(--input-color-primary-active-color),
+      var(--input-color-primary-active-border),
+      var(--input-color-primary-disabled-bg),
+      var(--input-color-primary-disabled-color),
+      var(--input-color-primary-disabled-border),
+      var(--input-focus-bg)
+    );
+  }
+
+  // Вариант outline с hover и active эффектами
+  &.outline {
+    border: none;
+    border-bottom: 1px solid transparent;
+    @include input-variant(
+      var(--input-color-outline-bg),
+      var(--input-color-outline-color),
+      var(--input-color-outline-border),
+      var(--input-color-outline-hover-bg),
+      var(--input-color-outline-hover-color),
+      var(--input-color-outline-hover-border),
+      var(--input-color-outline-active-bg),
+      var(--input-color-outline-active-color),
+      var(--input-color-outline-active-border),
+      var(--input-color-outline-disabled-bg),
+      var(--input-color-outline-disabled-color),
+      var(--input-color-outline-disabled-border),
+      var(--input-focus-bg)
+    );
+    &:hover {
+      border-bottom-color: var(--input-color-outline-hover-border);
+    }
+  }
+
+  &.error {
+    color: var(--input-error-color);
+    border-color: var(--input-error-border);
+    box-shadow: var(--input-error-shadow);
+
+    &:hover {
+      background-color: var(--input-error-bg);
+      border-color: var(--input-error-border);
+      color: var(--input-error-color);
+    }
+    &:active {
+      background-color: var(--input-error-bg);
+      border-color: var(--input-error-border);
+      color: var(--input-error-color);
+    }
+  }
+
+  // Размеры инпута через цикл: xs, s, m, l, xl
+  @each $size in (xs, s, m, l, xl) {
+    &.#{$size} {
+      font-size: var(--input-font-size-#{$size});
+      padding: var(--input-padding-#{$size});
+    }
+  }
+}
+
+// Если пользователь хочет скрыть counter
+.hiddenCounter[type="number"]::-webkit-outer-spin-button,
+.hiddenCounter[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+.hiddenCounter[type='number'],
+.hiddenCounter[type="number"]:hover,
+.hiddenCounter[type="number"]:focus {
+  appearance: none;
+  -moz-appearance: textfield;
+}
+
+.disabled {
+  color: var(--input-color-primary-disabled-color);
+}
+
+.error {
+  color: var(--input-error-color);
+}
+
+.icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: inherit;
+}
