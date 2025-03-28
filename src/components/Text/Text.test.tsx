@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import { Text, TextProps } from "./Text";
+import { Text } from "./Text";
+import { TextProps } from "./Text.types";
 
 // Обёртка для рендера текста с дефолтными пропсами
 const renderText = (props: Partial<TextProps> = {}) => {

@@ -1,77 +1,19 @@
-import { ElementType, forwardRef, HTMLAttributes, ReactNode } from "react";
+import { ElementType, forwardRef, memo, useMemo } from "react";
 import clsx from "clsx";
 
 import styles from "./Text.module.scss";
+import { TextProps, TextVariant, TEXT_DEFAULTS } from "./Text.types";
 
-export type TextVariant =
-  | "display-xl"
-  | "display-lg"
-  | "h1"
-  | "h2"
-  | "h3"
-  | "h4"
-  | "h5"
-  | "h6"
-  | "body-lg"
-  | "body-md"
-  | "body-sm"
-  | "caption"
-  | "overline";
+/**
+ * Определяет HTML-элемент по умолчанию на основе варианта типографики
+ * @param variant - вариант типографики
+ * @returns ElementType - HTML-элемент
+ */
+const getDefaultComponent = (variant?: TextVariant): ElementType => {
+  if (!variant) {
+    return "p";
+  }
 
-export type TextAlign = "left" | "center" | "right" | "justify";
-export type TextWeight = "regular" | "medium" | "semibold" | "bold";
-
-export interface TextProps extends HTMLAttributes<HTMLElement> {
-  /** Текстовое содержимое */
-  children: ReactNode;
-  /** Вариант типографики */
-  variant: TextVariant;
-  /** HTML элемент, который будет использован */
-  component?: ElementType;
-  /** Цвет текста */
-  color?: string;
-  /** Выравнивание текста */
-  align?: TextAlign;
-  /** Насыщенность шрифта */
-  weight?: TextWeight;
-  /** Обрезать текст с многоточием */
-  truncate?: boolean;
-  /** Добавить нижний отступ */
-  gutterBottom?: boolean;
-  /** Запретить перенос текста */
-  noWrap?: boolean;
-}
-
-export const Text = forwardRef<HTMLElement, TextProps>((props, ref) => {
-  const { children, variant, component, color, align, weight, truncate, gutterBottom, noWrap, className, ...rest } = props;
-
-  // Определяем компонент по умолчанию на основе варианта
-  const Component = component || getDefaultComponent(variant);
-
-  const textClass = clsx(
-    styles.text,
-    styles[variant],
-    align && styles[`align-${align}`],
-    weight && styles[`weight-${weight}`],
-    {
-      [styles.truncate]: truncate,
-      [styles.gutterBottom]: gutterBottom,
-      [styles.noWrap]: noWrap,
-    },
-    className
-  );
-
-  const style = color ? { color, ...rest.style } : rest.style;
-
-  return (
-    <Component ref={ref} className={textClass} style={style} {...rest}>
-      {children}
-    </Component>
-  );
-});
-
-// Функция для определения HTML элемента по умолчанию на основе варианта
-function getDefaultComponent(variant: TextVariant): ElementType {
   if (variant.startsWith("h")) {
     return variant as ElementType; // h1-h6
   }
@@ -80,15 +22,84 @@ function getDefaultComponent(variant: TextVariant): ElementType {
     return "h1";
   }
 
-  if (variant === "overline") {
-    return "span";
-  }
-
-  if (variant === "caption") {
+  if (variant === "overline" || variant === "caption") {
     return "span";
   }
 
   return "p"; // body-* по умолчанию
-}
+};
+
+export const Text = memo(
+  forwardRef<HTMLElement, TextProps>((props, ref) => {
+    const {
+      children,
+      variant = TEXT_DEFAULTS.VARIANT,
+      component,
+      color,
+      align,
+      weight,
+      truncate = TEXT_DEFAULTS.TRUNCATE,
+      gutterBottom = TEXT_DEFAULTS.GUTTER_BOTTOM,
+      noWrap = TEXT_DEFAULTS.NO_WRAP,
+      className,
+      "aria-label": ariaLabel,
+      "aria-labelledby": ariaLabelledby,
+      "aria-hidden": ariaHidden,
+      "aria-live": ariaLive,
+      "aria-atomic": ariaAtomic,
+      ...rest
+    } = props;
+
+    const Component = useMemo(() => component || getDefaultComponent(variant), [component, variant]);
+
+    const textClass = clsx(
+      styles.text,
+      variant && styles[variant],
+      align && styles[`align-${align}`],
+      weight && styles[`weight-${weight}`],
+      {
+        [styles.truncate]: !!truncate,
+        [styles.gutterBottom]: !!gutterBottom,
+        [styles.noWrap]: !!noWrap,
+      },
+      className
+    );
+
+    // Добавляем роль для улучшения доступности, если это не стандартный HTML-элемент
+    const ariaProps: Record<string, string | boolean> = {};
+
+    // Проверяем, является ли компонент нестандартным HTML-элементом
+    if (component && typeof component === "string" && !component.match(/^(h[1-6]|p|span|div)$/)) {
+      ariaProps.role = "text";
+    }
+
+    // Добавляем aria-атрибуты, если они определены
+    if (ariaLabel) ariaProps["aria-label"] = ariaLabel;
+    if (ariaLabelledby) ariaProps["aria-labelledby"] = ariaLabelledby;
+    if (ariaHidden !== undefined) ariaProps["aria-hidden"] = ariaHidden;
+    if (ariaLive) ariaProps["aria-live"] = ariaLive;
+    if (ariaAtomic !== undefined) ariaProps["aria-atomic"] = ariaAtomic;
+
+    // Оптимизированное формирование стилей
+    const style = useMemo(() => {
+      return color ? { color, ...rest.style } : rest.style;
+    }, [color, rest.style]);
+
+    // Проверка на наличие дочерних элементов
+    const hasChildren = children !== undefined && children !== null && children !== "";
+
+    // data-атрибуты для тестирования
+    const dataAttributes = {
+      "data-variant": variant,
+      "data-component": typeof Component === "string" ? Component : undefined,
+    };
+
+    return (
+      <Component ref={ref} className={textClass} style={style} {...ariaProps} {...dataAttributes} {...rest}>
+        {hasChildren ? children : null}
+      </Component>
+    );
+  })
+);
 
 Text.displayName = "Text";
