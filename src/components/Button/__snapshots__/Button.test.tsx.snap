@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button component matches snapshot 1`] = `
+<button
+  class="button primary m"
+  type="button"
+>
+  <span
+    class="content"
+    style="visibility: visible;"
+  >
+    <span
+      class="label"
+    >
+      Snapshot Button
+    </span>
+  </span>
+</button>
+`;
