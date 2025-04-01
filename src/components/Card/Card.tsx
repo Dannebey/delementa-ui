@@ -1,7 +1,14 @@
-import React, { forwardRef } from "react";
+import { forwardRef } from "react";
 import clsx from "clsx";
 import styles from "./Card.module.scss";
-import { CardProps, CardHeaderProps, CardMediaProps, CardContentProps, CardActionsProps, CardFooterProps } from "./Card.types";
+import {
+  CardProps,
+  CardHeaderProps,
+  CardMediaProps,
+  CardContentProps,
+  CardActionsProps,
+  CardFooterProps,
+} from "./Card.types";
 
 const CardRoot = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
   const {
@@ -31,7 +38,7 @@ const CardRoot = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
       [styles.fullWidth]: fullWidth,
       [styles.clickable]: !!onClick,
     },
-    className
+    className,
   );
 
   const cardStyles = {
@@ -58,9 +65,22 @@ const CardRoot = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
 CardRoot.displayName = "Card";
 
 const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>((props, ref) => {
-  const { title, subtitle, avatar, action, align = "left", className, children, ...rest } = props;
+  const {
+    title,
+    subtitle,
+    avatar,
+    action,
+    align = "left",
+    className,
+    children,
+    ...rest
+  } = props;
 
-  const headerClasses = clsx(styles.cardHeader, styles[`align-${align}`], className);
+  const headerClasses = clsx(
+    styles.cardHeader,
+    styles[`align-${align}`],
+    className,
+  );
 
   return (
     <div ref={ref} className={headerClasses} {...rest}>
@@ -78,7 +98,17 @@ const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>((props, ref) => {
 CardHeader.displayName = "CardHeader";
 
 const CardMedia = forwardRef<HTMLDivElement, CardMediaProps>((props, ref) => {
-  const { image, alt, height, component = "img", objectFit = "cover", className, children, style, ...rest } = props;
+  const {
+    image,
+    alt,
+    height,
+    component = "img",
+    objectFit = "cover",
+    className,
+    children,
+    style,
+    ...rest
+  } = props;
 
   const mediaClasses = clsx(styles.cardMedia, className);
   const mediaStyles = {
@@ -88,10 +118,29 @@ const CardMedia = forwardRef<HTMLDivElement, CardMediaProps>((props, ref) => {
 
   return (
     <div ref={ref} className={mediaClasses} style={mediaStyles} {...rest}>
-      {image && component === "img" && <img src={image} alt={alt || ""} className={styles.mediaImage} style={{ objectFit }} />}
-      {image && component === "video" && <video src={image} className={styles.mediaVideo} style={{ objectFit }} controls />}
+      {image && component === "img" && (
+        <img
+          src={image}
+          alt={alt || ""}
+          className={styles.mediaImage}
+          style={{ objectFit }}
+        />
+      )}
+      {image && component === "video" && (
+        <video
+          src={image}
+          className={styles.mediaVideo}
+          style={{ objectFit }}
+          controls
+        />
+      )}
       {image && component === "iframe" && (
-        <iframe src={image} className={styles.mediaIframe} style={{ objectFit }} title={alt || "Card media"} />
+        <iframe
+          src={image}
+          className={styles.mediaIframe}
+          style={{ objectFit }}
+          title={alt || "Card media"}
+        />
       )}
       {children}
     </div>
@@ -100,43 +149,66 @@ const CardMedia = forwardRef<HTMLDivElement, CardMediaProps>((props, ref) => {
 
 CardMedia.displayName = "CardMedia";
 
-const CardContent = forwardRef<HTMLDivElement, CardContentProps>((props, ref) => {
-  const { padding = "m", maxHeight, overflow, className, children, style, ...rest } = props;
+const CardContent = forwardRef<HTMLDivElement, CardContentProps>(
+  (props, ref) => {
+    const {
+      padding = "m",
+      maxHeight,
+      overflow,
+      className,
+      children,
+      style,
+      ...rest
+    } = props;
 
-  const contentClasses = clsx(styles.cardContent, styles[`padding-${padding}`], className);
+    const contentClasses = clsx(
+      styles.cardContent,
+      styles[`padding-${padding}`],
+      className,
+    );
 
-  const contentStyles = {
-    ...style,
-    maxHeight,
-    overflow,
-  };
+    const contentStyles = {
+      ...style,
+      maxHeight,
+      overflow,
+    };
 
-  return (
-    <div ref={ref} className={contentClasses} style={contentStyles} {...rest}>
-      {children}
-    </div>
-  );
-});
+    return (
+      <div ref={ref} className={contentClasses} style={contentStyles} {...rest}>
+        {children}
+      </div>
+    );
+  },
+);
 
 CardContent.displayName = "CardContent";
 
-const CardActions = forwardRef<HTMLDivElement, CardActionsProps>((props, ref) => {
-  const { align = "left", spacing = "m", direction = "row", className, children, ...rest } = props;
+const CardActions = forwardRef<HTMLDivElement, CardActionsProps>(
+  (props, ref) => {
+    const {
+      align = "left",
+      spacing = "m",
+      direction = "row",
+      className,
+      children,
+      ...rest
+    } = props;
 
-  const actionsClasses = clsx(
-    styles.cardActions,
-    styles[`align-${align}`],
-    styles[`spacing-${spacing}`],
-    styles[`direction-${direction}`],
-    className
-  );
+    const actionsClasses = clsx(
+      styles.cardActions,
+      styles[`align-${align}`],
+      styles[`spacing-${spacing}`],
+      styles[`direction-${direction}`],
+      className,
+    );
 
-  return (
-    <div ref={ref} className={actionsClasses} {...rest}>
-      {children}
-    </div>
-  );
-});
+    return (
+      <div ref={ref} className={actionsClasses} {...rest}>
+        {children}
+      </div>
+    );
+  },
+);
 
 CardActions.displayName = "CardActions";
 

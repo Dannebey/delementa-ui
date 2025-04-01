@@ -1,5 +1,5 @@
 import { HTMLAttributes, ReactNode } from "react";
-import { Size } from "../../types/Size";
+import { Size } from "@/types/Size";
 
 export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   variant?: "elevated" | "outlined" | "flat";
@@ -13,7 +13,8 @@ export interface CardProps extends HTMLAttributes<HTMLDivElement> {
   shadow?: "none" | Size;
 }
 
-export interface CardHeaderProps extends Omit<HTMLAttributes<HTMLDivElement>, "title"> {
+export interface CardHeaderProps
+  extends Omit<HTMLAttributes<HTMLDivElement>, "title"> {
   title?: ReactNode;
   subtitle?: ReactNode;
   avatar?: ReactNode;

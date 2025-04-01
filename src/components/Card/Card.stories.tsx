@@ -40,7 +40,6 @@ const meta: Meta<typeof Card> = {
 export default meta;
 type Story = StoryObj<typeof Card>;
 
-// Базовая карточка
 export const Basic: Story = {
   args: {
     variant: "elevated",
@@ -51,7 +50,6 @@ export const Basic: Story = {
   },
 };
 
-// Карточка с заголовком и содержимым
 export const WithHeaderAndContent: Story = {
   args: {
     variant: "elevated",
@@ -70,7 +68,6 @@ export const WithHeaderAndContent: Story = {
   },
 };
 
-// Карточка с медиа-контентом
 export const WithMedia: Story = {
   args: {
     variant: "elevated",
@@ -93,7 +90,6 @@ export const WithMedia: Story = {
   },
 };
 
-// Интерактивная карточка
 export const Interactive: Story = {
   args: {
     variant: "outlined",
@@ -114,7 +110,6 @@ export const Interactive: Story = {
   },
 };
 
-// Карточка с действиями
 export const WithActions: Story = {
   args: {
     variant: "elevated",
@@ -134,7 +129,6 @@ export const WithActions: Story = {
   },
 };
 
-// Карточка с футером
 export const WithFooter: Story = {
   args: {
     variant: "elevated",
@@ -154,7 +148,6 @@ export const WithFooter: Story = {
   },
 };
 
-// Различные варианты карточек
 export const Variants: Story = {
   render: () => (
     <div style={{ display: "flex", gap: "20px", flexWrap: "wrap" }}>
