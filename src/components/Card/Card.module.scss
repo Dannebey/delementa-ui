@@ -1,0 +1,211 @@
+$card-padding: (
+  none: 0,
+  xs: var(--card-padding-xs),
+  s: var(--card-padding-s),
+  m: var(--card-padding-m),
+  l: var(--card-padding-l),
+  xl: var(--card-padding-xl),
+);
+
+$card-radius: (
+  none: 0,
+  xs: var(--card-radius-xs),
+  s: var(--card-radius-s),
+  m: var(--card-radius-m),
+  l: var(--card-radius-l),
+  xl: var(--card-radius-xl),
+);
+
+$card-shadow: (
+  none: none,
+  xs: var(--card-shadow-xs),
+  s: var(--card-shadow-s),
+  m: var(--card-shadow-m),
+  l: var(--card-shadow-l),
+  xl: var(--card-shadow-xl),
+);
+
+$card-variants: (
+  elevated: (
+    box-shadow: var(--card-shadow-medium),
+    border: none,
+  ),
+  outlined: (
+    box-shadow: none,
+    border: 1px solid var(--card-border-color),
+  ),
+  flat: (
+    box-shadow: none,
+    border: none,
+  ),
+);
+
+$card-spacing: (
+  xs: var(--card-spacing-xs),
+  s: var(--card-spacing-s),
+  m: var(--card-spacing-m),
+  l: var(--card-spacing-l),
+  xl: var(--card-spacing-xl),
+);
+
+.card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  box-sizing: border-box;
+  transition: all 0.2s ease-in-out;
+  width: 100%;
+
+  @each $variant, $props in $card-variants {
+    &.variant-#{$variant} {
+      background-color: var(--card-bg-color);
+      @each $prop, $value in $props {
+        #{$prop}: $value;
+      }
+    }
+  }
+
+  @each $size, $value in $card-padding {
+    &.padding-#{$size} {
+      padding: $value;
+    }
+  }
+
+  @each $size, $value in $card-radius {
+    &.radius-#{$size} {
+      border-radius: $value;
+    }
+  }
+
+  @each $size, $value in $card-shadow {
+    &.shadow-#{$size} {
+      box-shadow: $value;
+    }
+  }
+
+  &.hoverable {
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--card-shadow-xl);
+    }
+  }
+
+  &.fullWidth {
+    width: 100%;
+  }
+
+  &.clickable {
+    cursor: pointer;
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(var(--color-primary), 0.3);
+    }
+  }
+}
+
+.cardHeader {
+  display: flex;
+  padding: var(--card-padding-m);
+
+  @each $align in (left, center, right) {
+    &.align-#{$align} {
+      justify-content: if(
+        $align == left,
+        flex-start,
+        if($align == center, center, flex-end)
+      );
+    }
+  }
+
+  .avatar {
+    margin-right: var(--card-spacing-m);
+    display: flex;
+    align-items: center;
+  }
+
+  .headerContent {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .title {
+    font-weight: 600;
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .subtitle {
+    font-size: 0.875rem;
+    color: var(--card-subtitle-color);
+  }
+
+  .action {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+  }
+}
+
+.cardMedia {
+  position: relative;
+  overflow: hidden;
+
+  .mediaImage,
+  .mediaVideo,
+  .mediaIframe {
+    width: 100%;
+    display: block;
+  }
+}
+
+.cardContent {
+  flex: 1;
+  @each $size, $value in $card-padding {
+    &.padding-#{$size} {
+      padding: $value;
+    }
+  }
+}
+
+.cardActions {
+  display: flex;
+  padding: var(--card-padding-m);
+
+  @each $align in (left, center, right) {
+    &.align-#{$align} {
+      justify-content: if(
+        $align == left,
+        flex-start,
+        if($align == center, center, flex-end)
+      );
+    }
+  }
+
+  @each $direction in (row, column) {
+    &.direction-#{$direction} {
+      flex-direction: $direction;
+      @each $size, $value in $card-spacing {
+        &.spacing-#{$size} > * {
+          @if $direction == row {
+            margin-right: $value;
+            &:last-child {
+              margin-right: 0;
+            }
+          } @else {
+            margin-bottom: $value;
+            &:last-child {
+              margin-bottom: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.cardFooter {
+  padding: var(--card-padding-m);
+  border-top: 1px solid var(--card-border-color);
+}
