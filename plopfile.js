@@ -55,10 +55,7 @@ export default function (plop) {
         type: "add",
         path: "src/components/{{pascalCase name}}/_{{kebabCase name}}.vars.scss",
         templateFile: "generator/templates/component/_component.vars.scss.hbs",
-        skip: (data) =>
-          data.withVars
-            ? undefined
-            : "Пользователь выбрал не создавать SCSS-переменные.",
+        skip: (data) => (data.withVars ? undefined : "Пользователь выбрал не создавать SCSS-переменные."),
         abortOnFail: true,
       },
       // 5) Storybook-истории (создаётся, только если пользователь согласился)
@@ -66,10 +63,7 @@ export default function (plop) {
         type: "add",
         path: "src/components/{{pascalCase name}}/{{pascalCase name}}.stories.tsx",
         templateFile: "generator/templates/component/component.stories.tsx.hbs",
-        skip: (data) =>
-          data.withStories
-            ? undefined
-            : "Пользователь выбрал не создавать stories.",
+        skip: (data) => (data.withStories ? undefined : "Пользователь выбрал не создавать stories."),
         abortOnFail: true,
       },
       // 6) Тесты (создаются, только если пользователь согласился)
@@ -77,24 +71,17 @@ export default function (plop) {
         type: "add",
         path: "src/components/{{pascalCase name}}/{{pascalCase name}}.test.tsx",
         templateFile: "generator/templates/component/component.test.tsx.hbs",
-        skip: (data) =>
-          data.withTests
-            ? undefined
-            : "Пользователь выбрал не создавать тесты.",
+        skip: (data) => (data.withTests ? undefined : "Пользователь выбрал не создавать тесты."),
         abortOnFail: true,
       },
       // 7) Модификация (при необходимости) файла темы — например, если нужно добавить
       //    @forward для переменных в глобальную тему. Используем pattern/modify.
       {
         type: "modify",
-        path: "src/styles/theme/theme.scss",
+        path: "src/styles/theme.scss",
         pattern: /(\/\* COMPONENT IMPORTS \*\/)/g,
-        template:
-          '$1\n@forward "components/{{pascalCase name}}/_{{kebabCase name}}.vars.scss";',
-        skip: (data) =>
-          data.withVars
-            ? undefined
-            : "Пользователь выбрал не создавать SCSS-переменные, не добавляем forward в тему.",
+        template: '$1\n@forward "components/{{pascalCase name}}/_{{kebabCase name}}.vars.scss";',
+        skip: (data) => (data.withVars ? undefined : "Пользователь выбрал не создавать SCSS-переменные, не добавляем forward в тему."),
       },
     ],
   });
