@@ -1,0 +1,112 @@
+@use "sass:color";
+
+@mixin snackbar-variant(
+  $bg,
+) {
+  background-color: $bg;
+}
+
+$positions: (
+  top: 10px,
+  bottom: 10px,
+  left: 10px,
+  right: 10px,
+);
+
+.snackbar {
+  position: fixed;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 500;
+  cursor: text;
+  border: 1px solid transparent;
+  border-radius: var(--input-border-radius);
+  text-decoration: none;
+  background: transparent;
+  min-width: 300px;
+  width: auto;
+  padding: 16px;
+  box-shadow: var(--snackbar-border-shadow);
+  color: var(--snackbar-color);
+  transition: opacity 0.3s ease;
+
+  @each $position, $value in $positions {
+    &.#{$position} {
+      #{$position}: $value;
+    }
+  }
+
+  &.fade-in {
+    transform: translateY(10px);
+    animation: fadeIn 0.3s forwards;
+  }
+
+  &.fade-out {
+    animation: fadeOut 0.3s forwards;
+  }
+
+  &.info {
+    @include snackbar-variant(
+      var(--snackbar-color-info-bg),
+    );
+  }
+
+  &.success {
+    @include snackbar-variant(
+      var(--snackbar-color-success-bg),
+    );
+  }
+
+  &.warning {
+    @include snackbar-variant(
+     var(--snackbar-color-warning-bg),
+    );
+  }
+
+  &.error {
+    @include snackbar-variant(
+     var(--snackbar-color-error-bg),
+    );
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+}
+
+.info {
+  display: flex;
+  gap: 14px;
+}
+
+.loader {
+  color: var(--snackbar-color);
+}
+
+.title {
+  margin: 0 0 10px 0;
+}
+
+.close {
+  cursor: pointer;
+  color: var(--snackbar-close-icon-color);
+  font-size: var(--snackbar-close-icon-size);
+}
+
+.actionBlock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}

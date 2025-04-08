@@ -1,0 +1,23 @@
+@layer delementa-default-theme {
+    :root {
+        // Snackbar: цвета
+        --snackbar-color: #ffffff;
+
+        --snackbar-color-info-bg: rgba(var(--color-primary), 0.9);
+
+        --snackbar-color-success-bg: rgba(var(--color-success), 0.9);
+
+        --snackbar-color-warning-bg: rgba(var(--color-warning), 0.9);
+
+        --snackbar-color-error-bg: rgba(var(--color-danger), 0.9);
+
+        // Snackbar: общие стили
+        --snackbar-border-radius: 4px;
+        --snackbar-border-shadow:  0 4px 8px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.1);
+
+        // Snackbar: иконка закрытия
+        --snackbar-close-icon-size: 1.3rem;
+        --snackbar-close-icon-color: #ffffff;
+        --snackbar-close-icon-hover-color: var(--color-close-icon-hover);
+    }
+}
